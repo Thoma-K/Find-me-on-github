@@ -7,7 +7,7 @@ const UserItem = ({user: {avatar_url, login}}) => {
       <div className="flex-row items-center space-x-4 card-body">
         <div className='avatar'>
           <div className="rounded-full shadow width-14 h-14">
-            <img src={avatar_url} alt="User's picture" />
+            <img src={avatar_url} alt="User" />
           </div>
         </div>
         <div>

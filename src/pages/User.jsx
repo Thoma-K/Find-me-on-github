@@ -1,18 +1,20 @@
 import { useEffect, useContext } from "react"
 import { Link, useParams } from "react-router-dom"
-import { FaCodepen, FaStore, FaUserFriends, FaUsers} from "react-icons/fa"
+import { FaNetworkWired, FaStore, FaUserFriends, FaUsers} from "react-icons/fa"
+import ReposList from "../components/repos/ReposList"
 import GithubContext from "../context/github/GithubContext"
 import Spinner from "../components/layout/Spinner"
 
 
 const User = () => {
 
-  const {getUser, user, loading} = useContext(GithubContext)
+  const {getUser, getUserRepos, repos, user, loading} = useContext(GithubContext)
 
   const params = useParams()
 
   useEffect(() => {
     getUser(params.login)
+    getUserRepos(params.login)
   }, [])
 
   const {
@@ -48,7 +50,7 @@ const User = () => {
         <div className="custom-card-image mb-6 md:mb-0">
           <div className="rounded-lg shadow-xl card image-full">
             <figure>
-              <img src={avatar_url} alt="User's picture" />
+              <img src={avatar_url} alt="User" />
             </figure>
             <div className="card-body justify-end p-3">
               <h2 className="card-title mb-0">
@@ -95,9 +97,85 @@ const User = () => {
                 </div>
               </div>
             )}
+            {blog && (
+              <div className="stats ml-2">
+                <div className="stat-title text-md">
+                  Website
+                </div>
+                <div className="text-lg stat-value">
+                  <a 
+                    href={`https://${blog}`} 
+                    target="_blank"
+                    rel="noreferrer">
+                      {blog}
+                    </a>
+                </div>
+              </div>
+            )}
+            {twitter_username && (
+              <div className="stats ml-2">
+                <div className="stat-title text-md">
+                  Twitter
+                </div>
+                <div className="text-lg stat-value">
+                <a 
+                    href={`https://twitter.com/${twitter_username}`} 
+                    target="_blank"
+                    rel="noreferrer">
+                      {twitter_username}
+                    </a>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+
+      <div className='w-full py-5 mb-6 rounded-lg shadow-md bg-base-100 stats'>
+          <div className='grid grid-cols-1 md:grid-cols-3'>
+            <div className='stat'>
+              <div className='stat-figure text-secondary'>
+                <FaUsers className='text-3xl md:text-5xl' />
+              </div>
+              <div className='stat-title pr-5'>Followers</div>
+              <div className='stat-value pr-5 text-3xl md:text-4xl'>
+                {followers}
+              </div>
+            </div>
+
+            <div className='stat'>
+              <div className='stat-figure text-secondary'>
+                <FaUserFriends className='text-3xl md:text-5xl' />
+              </div>
+              <div className='stat-title pr-5'>Following</div>
+              <div className='stat-value pr-5 text-3xl md:text-4xl'>
+                {following}
+              </div>
+            </div>
+
+            <div className='stat'>
+              <div className='stat-figure text-secondary'>
+                <FaNetworkWired className='text-3xl md:text-5xl' />
+              </div>
+              <div className='stat-title pr-5'>Public Repos</div>
+              <div className='stat-value pr-5 text-3xl md:text-4xl'>
+                {public_repos}
+              </div>
+            </div>
+
+            <div className='stat'>
+              <div className='stat-figure text-secondary'>
+                <FaStore className='text-3xl md:text-5xl' />
+              </div>
+              <div className='stat-title pr-5'>Public Gists</div>
+              <div className='stat-value pr-5 text-3xl md:text-4xl'>
+                {public_gists}
+              </div>
+            </div>
+          </div>
+        </div>
+      <ReposList repos={repos}/>
     </div>
     </>
   )
