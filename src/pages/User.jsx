@@ -122,11 +122,11 @@ const User = () => {
               </div>
             )}
             {twitter_username && (
-              <div className="stats ml-2">
-                <div className="stat-title text-md">
+              <div className="stats border-none">
+                <div className="stat-title text-md px-1 mx-1">
                   Twitter
                 </div>
-                <div className="text-lg stat-value">
+                <div className="text-lg stat-value px-1 mx-1 border-none">
                 <a 
                     href={`https://twitter.com/${twitter_username}`} 
                     target="_blank"
