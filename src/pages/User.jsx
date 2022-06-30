@@ -4,18 +4,27 @@ import { FaNetworkWired, FaStore, FaUserFriends, FaUsers} from "react-icons/fa"
 import ReposList from "../components/repos/ReposList"
 import GithubContext from "../context/github/GithubContext"
 import Spinner from "../components/layout/Spinner"
+import { getUser, getUserRepos } from "../context/github/GithubActions"
 
 
 const User = () => {
 
-  const {getUser, getUserRepos, repos, user, loading} = useContext(GithubContext)
+  const { dispatch, repos, user, loading} = useContext(GithubContext)
 
   const params = useParams()
 
   useEffect(() => {
-    getUser(params.login)
-    getUserRepos(params.login)
-  }, [])
+    dispatch({type: 'SET_LOADING'})
+    const getUserData = async() =>{
+      const userData = await getUser(params.login)
+      dispatch({type: 'GET_USER', payload: userData})
+      
+      const userReposData = await getUserRepos(params.login)
+      dispatch({type: 'GET_REPOS', payload: userReposData})
+    }
+
+    getUserData()
+  }, [dispatch, params.login])
 
   const {
     name,
@@ -88,21 +97,21 @@ const User = () => {
           </div>
           <div className="w-f rounded-lg shadow-md bg-base-100 stats">
             {location && (
-              <div className="stats ml-2">
-                <div className="stat-title text-md">
+              <div className="stats border-none">
+                <div className="stat-title text-md px-1 mx-1">
                   Location
                 </div>
-                <div className="text-lg stat-value">
+                <div className="text-lg stat-value px-1 mx-1 border-none">
                   {location}
                 </div>
               </div>
             )}
             {blog && (
-              <div className="stats ml-2">
-                <div className="stat-title text-md">
+              <div className="stats border-none">
+                <div className="stat-title text-md px-1 mx-1">
                   Website
                 </div>
-                <div className="text-lg stat-value">
+                <div className="text-lg stat-value px-1 mx-1 border-none">
                   <a 
                     href={`https://${blog}`} 
                     target="_blank"
