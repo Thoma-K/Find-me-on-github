@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import TagManager from 'react-gtm-module';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Alert from './components/layout/Alert';
@@ -12,9 +11,7 @@ import { AlertProvider } from './context/alert/AlertContext';
 import { useEffect } from 'react';
 
 function App() {
-  useEffect(()=>{
-    TagManager.initialize({ gtmId:'GTM-MDV5JWS' });
-  }, [])
+
   return (
     <GithubProvider>
       <AlertProvider>
