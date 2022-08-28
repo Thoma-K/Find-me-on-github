@@ -1,6 +1,9 @@
 import { FaHome } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 const NotFound = () => {
+  useEffect(() => {
+    document.title = "Find Me On Github | 404 page";
+  }, []);
   return (
     <div className="hero">
       <div className="text-center hero-content">

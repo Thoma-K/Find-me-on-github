@@ -8,7 +8,9 @@ import { getUser, getUserRepos } from "../context/github/GithubActions"
 
 
 const User = () => {
-
+  useEffect(() => {
+    document.title = "Find Me On Github | User Page";
+  }, []);
   const { dispatch, repos, user, loading} = useContext(GithubContext)
 
   const params = useParams()

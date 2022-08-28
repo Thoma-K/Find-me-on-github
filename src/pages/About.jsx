@@ -1,6 +1,9 @@
-import React from 'react'
+import {useEffect} from 'react'
 
 const About = () => {
+  useEffect(() => {
+    document.title = "Find Me On Github | About Us";
+  }, []);
   return (
     <div>
       <h1 className="text-6xl mb4">Find Me On Github</h1>
