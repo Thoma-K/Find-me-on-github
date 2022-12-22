@@ -8,7 +8,6 @@ import NotFound from './pages/NotFound';
 import User from './pages/User';
 import { GithubProvider } from './context/github/GithubContext';
 import { AlertProvider } from './context/alert/AlertContext';
-import { useEffect } from 'react';
 
 function App() {
 

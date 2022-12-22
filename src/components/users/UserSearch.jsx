@@ -13,7 +13,7 @@ const UserSearch = () => {
 
   const handleChange = (e) => setText(e.target.value)
 
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
     if(text === '') {
       setAlert('Please enter something', 'error')
@@ -22,6 +22,12 @@ const UserSearch = () => {
       const users = await searchUsers(text)
       dispatch({type: 'GET_USERS', payload: users})
       setText('')
+      const usernames = users.map(user => user.login);
+      window.dataLayer.push({
+        event: "searchUsers",
+        searchTerm: text,
+        usernames: usernames
+      })
     }
   }
 
