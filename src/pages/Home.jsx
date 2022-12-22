@@ -1,4 +1,4 @@
-import { useEffect } from React
+import { useEffect } from "react"
 import UserResults from "../components/users/UserResults"
 import UserSearch from "../components/users/UserSearch"
 
