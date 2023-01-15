@@ -24,10 +24,15 @@ const UserSearch = () => {
       setText('')
       const usernames = users.map(user => user.login);
       window.dataLayer.push({
-        event: "searchUsers",
+        event: "search",
         searchTerm: text,
-        usernames: usernames
+        //usernames: usernames
       })
+      window.dataLayer.push({results: null});
+      window.dataLayer.push({
+        event: "view_search_results",
+        results: usernames
+      });
     }
   }
 
