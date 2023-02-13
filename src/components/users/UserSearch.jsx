@@ -22,6 +22,7 @@ const UserSearch = () => {
       const users = await searchUsers(text)
       dispatch({type: 'GET_USERS', payload: users})
       setText('')
+      console.log(users)
       const usernames = users.map(user => user.login);
       window.dataLayer.push({
         event: "search",
