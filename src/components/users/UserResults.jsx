@@ -5,27 +5,29 @@ import GithubContext from '../../context/github/GithubContext';
 
 const UserResults = () => {
   const { users, loading } = useContext(GithubContext);
+  const itemsArray = users.map(({ id, login }) => ({
+    item_id: id,
+    item_name: login,
+  }));
   window.dataLayer.push({ ecommerce: null });
   window.dataLayer.push({
     event: 'view_item_list',
+    item_list_name: 'Search Results',
     ecommerce: {
-      item_list_name: 'Search Results',
-      items: users.map(({ id, login }) => ({
-        item_id: id,
-        item_name: login,
-        item_list_name: 'Search Results',
-      })),
+      items: itemsArray,
     },
   });
-  console.log(users);
 
   if (!loading) {
     return (
-      <div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
-        {users.map((user) => (
-          <UserItem key={user.id} user={user} />
-        ))}
-      </div>
+      <>
+        <div id="space"></div>
+        <div className="grid grid-cols-1 gap-10 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+          {users.map((user) => (
+            <UserItem key={user.id} user={user} />
+          ))}
+        </div>
+      </>
     );
   } else {
     return <Spinner />;

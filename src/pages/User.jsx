@@ -49,6 +49,7 @@ const User = () => {
     public_gists,
     hireable,
   } = user;
+  console.log('I see you');
   window.dataLayer.push({ ecommerce: null });
   window.dataLayer.push({
     event: 'view_item',
