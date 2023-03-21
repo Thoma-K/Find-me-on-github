@@ -63,6 +63,12 @@ const User = () => {
       ],
     },
   });
+  window.dataLayer.push({
+    event: 'test_conversion',
+    originalValue: 'Thomas Kara',
+    hashedValue:
+      '6e2c9ab2b66314a18de3320ffbc22123cf879ff0cb10d797aeaaf95bc6a02406',
+  });
   if (loading) {
     return <Spinner />;
   }
